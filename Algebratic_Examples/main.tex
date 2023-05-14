@@ -1,21 +1,16 @@
 \documentclass[a4paper]{article}
-\usepackage{TPL_Example}
+\usepackage{pdflscape}
+\usepackage{../Style_Packages/TPL_Example}
+\usepackage{../Style_Packages/bussproofs}
+
 
 % Metadata
 \date{\today}
 \setmodule{Algebratic effect examples}
 \setterm{2023}
 
-%-------------------------------%
-% Other details
-% TODO: Fill these
-%-------------------------------%
 \title{}
 
-%-------------------------------%
-% Add / Delete commands and packages
-% TODO: Add / Delete here as you need
-%-------------------------------%
 \usepackage{amsmath,amssymb,bm}
 
 \newcommand{\KL}{\mathrm{KL}}
@@ -32,20 +27,107 @@
 \newcommand{\Natparam}{\bm H}
 \newcommand{\sufstat}{\bm u}
 
-% Main document
-\begin{document}
-    % Add header
-    \header{}
 
-    % Use `example` environment to add solutions
-    % \begin{example}[1.1] for example starts an environment formatted
-    % for example 1
-    \begin{example}[1]
-        
-    \end{example}
+\begin{document}
+ \header{}
+
+\textbf{Example : return 0}
+        \begin{center}
+		\AxiomC{}
+		\RightLabel{[LIT]}
+		\UnaryInfC{$\Gamma \vdash 0 :\: \tau$}
+		\RightLabel{[RET]}
+		\UnaryInfC{$\Gamma \vdash $ return 0 : $\tau \:\:|\:\:  \emptyset $}
+		\DisplayProof
+	\end{center}
+	Replace $\tau$ with Int:
+	 \begin{center}
+		\AxiomC{}
+		\RightLabel{[LIT]}
+		\UnaryInfC{$\Gamma \vdash 0 :\: Int$}
+		\RightLabel{[RET]}
+		\UnaryInfC{$\Gamma \vdash $ return 0 : $Int \:\:|\:\:  \emptyset $}
+		\DisplayProof
+	\end{center}
+    $\newline$
+    $\newline$
+    $\newline$
+    $\newline$
     
-    \begin{example}[2]
+   \textbf{Example: val x = 1; return x;}
+    	\begin{center}
+		\begin{prooftree}
+			\AxiomC{}
+			\RightLabel{[LIT]}
+			\UnaryInfC{$\Gamma \vdash 1 : \tau _0 $}
+			\RightLabel{[RET]}
+			\UnaryInfC{$\Gamma \vdash $ return 1 : $\tau_0 \:\:|\:\:  \emptyset $}
+			
+			\AxiomC{x : $\tau_1 \in \Gamma$ , x : $\tau_0$}
+			\RightLabel{[VAR]}
+			\UnaryInfC{$\Gamma \vdash x :\tau_0 \vdash x: \tau_1$}
+			\RightLabel{[RET]}
+			\UnaryInfC{$\Gamma, x:\tau_0 \vdash $ return x : $\tau_1 \:\:|\:\:  C_1 $}
 		
-    \end{example}
-    
+			\RightLabel{[VAL]}
+			\BinaryInfC{$\Gamma \vdash$ val x = return 1; return x : $\tau_1 \:\:|\:\: \emptyset \cup C_1$}
+		\end{prooftree}
+	\end{center}
+	$\newline$
+	Replace $\tau_0$ and $\tau_1$ with Int, $ C_1$ with $\emptyset$
+	 \begin{center}
+		\begin{prooftree}
+			\AxiomC{}
+			\RightLabel{[LIT]}
+			\UnaryInfC{$\Gamma \vdash 1 : Int $}
+			\RightLabel{[RET]}
+			\UnaryInfC{$\Gamma \vdash $ return 1 : $Int \:\:|\:\:  \emptyset $}
+			
+			\AxiomC{x : $Int \in \Gamma$ , x : $Int$}
+			\RightLabel{[VAR]}
+			\UnaryInfC{$\Gamma \vdash x : Int \vdash x: Int$}
+			\RightLabel{[RET]}
+			\UnaryInfC{$\Gamma, x : Int \vdash $ return x : $Int \:\:|\:\:  \emptyset $}
+		
+			\RightLabel{[VAL]}
+			\BinaryInfC{$\Gamma \vdash$ val x = return 1; return x : $Int \:\:|\:\: \emptyset \cup \emptyset$}
+		\end{prooftree}
+	\end{center}
+  $\pagebreak$
+  \begin{landscape}
+  \textbf{Example: def Identity = \{(x : Int, $\emptyset$) $\Rightarrow$ return x\}; Identity(1,$\emptyset$);}
+  
+    	\begin{center}
+		\begin{prooftree}
+			\AxiomC{x : $\tau_1 \in \Gamma , (x:Int, \emptyset)$}
+			\RightLabel{[VAR]}
+			\UnaryInfC{$\Gamma, (x:Int, \emptyset) \vdash x: \tau_1 |\:  C $}
+			\RightLabel{[RET]}
+			\UnaryInfC{$\Gamma ,(x:Int, \emptyset)\vdash $ return x : $\tau_1 \:\:|\:\:  C \cup \overrightarrow {g_j}$}
+			\RightLabel{[BLOCK]}
+			\UnaryInfC{$\Gamma \vdash$ \{(x : $Int$,$\emptyset) \Rightarrow $return x\} : $\sigma \:|\: C $}
+			
+			
+			\AxiomC{$Identity:^C(\tau'',\emptyset)\rightarrow \tau \in \Gamma, Identity:^{C'}$}
+			\RightLabel{[LIT]}
+			\UnaryInfC{$\Gamma, Identity:^{C'} \vdash Identity\::\:(\tau'', \emptyset) \rightarrow \tau \:|\: C$}
+			
+			\AxiomC{}
+			\RightLabel{[LIT]}
+			\UnaryInfC{$\Gamma , Identity:^{C'}\vdash 1 : \tau \:|\: C$}
+			
+			\AxiomC{$\Gamma, Identity:^{C'}\vdash \emptyset : \sigma | C$}
+			
+			\RightLabel{[APP]}
+			\TrinaryInfC{$\Gamma, Identity:^{C'} \sigma \vdash Identity(1, \emptyset) : \tau \:|\: C $}
+		
+			\RightLabel{[DEF]}
+			\BinaryInfC{$\Gamma \vdash$ def Identity = \{(x : Int, $\emptyset$) $\Rightarrow$ return x\}; Identity(1,$\emptyset$)}
+		\end{prooftree}
+	\end{center}
+	$\newline$
+	Replace $\tau_0$ and $\tau_1$ with Int, $ C_1$ with $\emptyset$
+	
+
+\end{landscape}
 \end{document}
