@@ -12,7 +12,7 @@ algebratic examples:
 
 
 abstract examples:
-- 
+
 
 ---
 
