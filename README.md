@@ -8,3 +8,6 @@ Step 1:
 
 Step 2:
 - Write it in wyern TPL.
+
+Note:
+- To view the examples, open the .pdf files.
