@@ -4,11 +4,15 @@ Examples of algebratic effect and abstract effect from "Effect, capabilities, an
 
 ---
 current progress:
+
 algebratic examples:
 - return 0
 - return x;
 - def Identity;
-abstract examples
+
+
+abstract examples:
+
 
 ---
 
