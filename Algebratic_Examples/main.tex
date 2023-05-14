@@ -99,34 +99,64 @@
   
     	\begin{center}
 		\begin{prooftree}
-			\AxiomC{x : $\tau_1 \in \Gamma , (x:Int, \emptyset)$}
+			\AxiomC{x : $\tau_1 \in \Gamma , \Gamma, x:Int, \emptyset:\sigma $}
 			\RightLabel{[VAR]}
-			\UnaryInfC{$\Gamma, (x:Int, \emptyset) \vdash x: \tau_1 |\:  C $}
+			\UnaryInfC{$\Gamma, x:Int, \emptyset:\sigma \vdash x: \tau_1 |\:  C $}
 			\RightLabel{[RET]}
-			\UnaryInfC{$\Gamma ,(x:Int, \emptyset)\vdash $ return x : $\tau_1 \:\:|\:\:  C \cup \overrightarrow {g_j}$}
+			\UnaryInfC{$\Gamma ,x:Int, \emptyset :\sigma \vdash $ return x : $\tau_1 \:\:|\:\:  C \cup \overrightarrow {g_j}$}
 			\RightLabel{[BLOCK]}
 			\UnaryInfC{$\Gamma \vdash$ \{(x : $Int$,$\emptyset) \Rightarrow $return x\} : $\sigma \:|\: C $}
 			
 			
-			\AxiomC{$Identity:^C(\tau'',\emptyset)\rightarrow \tau \in \Gamma, Identity:^{C'}$}
-			\RightLabel{[LIT]}
-			\UnaryInfC{$\Gamma, Identity:^{C'} \vdash Identity\::\:(\tau'', \emptyset) \rightarrow \tau \:|\: C$}
+			\AxiomC{$Identity:^C(\tau_2,\emptyset)\rightarrow \tau_0 \in \Gamma, Identity:^{C'}$}
+			\RightLabel{[TRANS]}
+			\UnaryInfC{$\Gamma, Identity:^{C} \vdash Identity\::\:(\tau_2, \emptyset) \rightarrow \tau_0 \:|\: C$}
 			
 			\AxiomC{}
 			\RightLabel{[LIT]}
-			\UnaryInfC{$\Gamma , Identity:^{C'}\vdash 1 : \tau \:|\: C$}
+			\UnaryInfC{$\Gamma , Identity:^{C'}\vdash 1 : \tau_0 \:|\: C$}
 			
 			\AxiomC{$\Gamma, Identity:^{C'}\vdash \emptyset : \sigma | C$}
 			
 			\RightLabel{[APP]}
-			\TrinaryInfC{$\Gamma, Identity:^{C'} \sigma \vdash Identity(1, \emptyset) : \tau \:|\: C $}
+			\TrinaryInfC{$\Gamma, Identity:^{C} \sigma \vdash Identity(1, \emptyset) : \tau_0 \:|\: C $}
 		
 			\RightLabel{[DEF]}
-			\BinaryInfC{$\Gamma \vdash$ def Identity = \{(x : Int, $\emptyset$) $\Rightarrow$ return x\}; Identity(1,$\emptyset$)}
+			\BinaryInfC{$\Gamma \vdash$ def Identity = \{(x : Int, $\emptyset$) $\Rightarrow$ return x\}; Identity(1,$\emptyset$) : $\tau_0$;}
 		\end{prooftree}
 	\end{center}
 	$\newline$
-	Replace $\tau_0$ and $\tau_1$ with Int, $ C_1$ with $\emptyset$
+	Replace C with $\emptyset$ (for [Ret] to apply at leftmost proof tree), $\tau_{0,1,2}$ with Int, $\overrightarrow {g_j}$ with $\emptyset$
+	    	\begin{center}
+		\begin{prooftree}
+			\AxiomC{x : $Int \in \Gamma , \Gamma, x:Int, \emptyset:\emptyset $}
+			\RightLabel{[VAR]}
+			\UnaryInfC{$\Gamma, x:Int, \emptyset:\emptyset \vdash x: Int |\:  \emptyset $}
+			\RightLabel{[RET]}
+			\UnaryInfC{$\Gamma ,x:Int, \emptyset :\emptyset \vdash $ return x : $Int \:\:|\:\:  \emptyset$}
+			\RightLabel{[BLOCK]}
+			\UnaryInfC{$\Gamma \vdash$ \{(x : $Int$,$\emptyset) \Rightarrow $return x\} : $\emptyset \:|\: \emptyset $}
+			
+			
+			\AxiomC{$Identity:^\emptyset(Int,\emptyset)\rightarrow Int \in \Gamma, Identity:^{\emptyset}$}
+			\RightLabel{[TRANS]}
+			\UnaryInfC{$\Gamma, Identity:^{\emptyset} \vdash Identity\::\:(Int, \emptyset) \rightarrow Int \:|\: \emptyset$}
+			
+			\AxiomC{}
+			\RightLabel{[LIT]}
+			\UnaryInfC{$\Gamma , Identity:^{\emptyset}\vdash 1 : Int \:|\: \emptyset$}
+			
+			\AxiomC{$\Gamma, Identity:^{\emptyset}\vdash \emptyset : \emptyset | \emptyset$}
+			
+			\RightLabel{[APP]}
+			\TrinaryInfC{$\Gamma, Identity:^{\emptyset} \emptyset \vdash Identity(1, \emptyset) : Int \:|\: \emptyset $}
+		
+			\RightLabel{[DEF]}
+			\BinaryInfC{$\Gamma \vdash$ def Identity = \{(x : Int, $\emptyset$) $\Rightarrow$ return x\}; Identity(1,$\emptyset$) : $Int$;}
+		\end{prooftree}
+	\end{center}
+	
+	
 	
 
 \end{landscape}
