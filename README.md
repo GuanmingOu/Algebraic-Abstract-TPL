@@ -9,7 +9,7 @@ current progress:
 type check: (in main.pdf and Example_Photo)
 - return 0
 - return x;
-- def Identity;
+- def Identity; (some mistake found, need to fix)
 - try
 - currying
 
