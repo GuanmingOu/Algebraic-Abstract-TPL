@@ -5,18 +5,27 @@ Examples of algebratic effect and abstract effect from "Effect, capabilities, an
 ---
 current progress:
 
-algebratic examples:
+## algebratic examples:
+type check: (in main.pdf and Example_Photo)
 - return 0
 - return x;
-- def Identity;
+- def Identity; (some mistake found, need to fix)
+- try
+- currying
 
-
-abstract examples:
-
+Dynamic handler: (in Dynamic_run_through)
+- val
+- val with no k
+- def
 
 ---
 
-Step 1:
+## abstract examples:
+
+
+---
+## plan
+Step 1: (now)
 - Type check examples
 - Handlers examples
 
@@ -25,3 +34,5 @@ Step 2:
 
 Note:
 - To view the examples, open the .pdf files.
+- Examples that are too large may not be written in latex
+- Example in jpg (handwritten) are yet to be transfer to latex
