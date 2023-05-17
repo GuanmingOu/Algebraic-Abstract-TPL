@@ -10,6 +10,8 @@ type check: (in main.pdf and Example_Photo)
 - return 0
 - return x;
 - def Identity;
+- try
+- currying
 
 Dynamic handler: (in Dynamic_run_through)
 - val
