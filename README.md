@@ -24,7 +24,8 @@ Dynamic handler: (in Dynamic_run_through)
 
 
 ---
-Step 1:
+## plan
+Step 1: (now)
 - Type check examples
 - Handlers examples
 
@@ -33,3 +34,5 @@ Step 2:
 
 Note:
 - To view the examples, open the .pdf files.
+- Examples that are too large may not be written in latex
+- Example in jpg (handwritten) are yet to be transfer to latex
