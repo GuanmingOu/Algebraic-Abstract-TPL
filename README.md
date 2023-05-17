@@ -10,6 +10,7 @@ type check: (in main.pdf and Example_Photo)
 - return 0
 - return x;
 - def Identity;
+
 Dynamic handler: (in Dynamic_run_through)
 - val
 - val with no k
