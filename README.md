@@ -1,11 +1,11 @@
-# Algebratic-Abstract Types and Programming Language
+# Algebraic-Abstract Types and Programming Language
 
 Examples of algebratic effect and abstract effect from "Effect, capabilities, and boxes" and "Bounded Abstract Effects".
 
 ---
 current progress:
 
-## algebratic examples:
+## algebraic examples:
 type check: (in main.pdf and Example_Photo)
 - return 0
 - return x;
